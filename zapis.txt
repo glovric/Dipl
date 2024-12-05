@@ -1,0 +1,3 @@
+Podesit kernel kad zeza windows:
+
+python -m ipykernel install --user --name Python_venv --display-name "Python_venv"
