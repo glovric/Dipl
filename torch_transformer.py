@@ -122,8 +122,8 @@ class DecoderLayer(nn.Module):
 class Transformer(nn.Module):
     def __init__(self, src_vocab_size, tgt_vocab_size, d_model, num_heads, num_layers, d_ff, max_seq_length, dropout):
         super(Transformer, self).__init__()
-        #self.encoder_embedding = nn.Embedding(src_vocab_size, d_model)
-        #self.decoder_embedding = nn.Embedding(tgt_vocab_size, d_model)
+        self.encoder_embedding = nn.Embedding(src_vocab_size, d_model)
+        self.decoder_embedding = nn.Embedding(tgt_vocab_size, d_model)
         self.positional_encoding = PositionalEncoding(d_model, max_seq_length)
 
         self.encoder_layers = nn.ModuleList([EncoderLayer(d_model, num_heads, d_ff, dropout) for _ in range(num_layers)])
@@ -154,5 +154,4 @@ class Transformer(nn.Module):
             dec_output = dec_layer(dec_output, enc_output, src_mask, tgt_mask)
 
         output = self.fc(dec_output)
-        print(f'output shape: {output.shape}')
         return output
